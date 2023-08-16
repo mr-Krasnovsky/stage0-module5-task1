@@ -1,8 +1,5 @@
 package com.epam.mjc.stage0;
 
-import java.util.Arrays;
-import java.util.Comparator;
-
 /**
  * Here are the tasks for working with the arrays.
  * <p>
@@ -14,7 +11,7 @@ public class ArrayTasks {
      * Return a String[] array that will list all the seasons of the year, starting with winter.
      */
     public String[] seasonsArray() {
-        return new String[]{"Winter", "Spring" , "Summer", "Autumn"};
+        return new String[]{"winter", "spring", "summer", "autumn"};
     }
 
     /**
@@ -30,7 +27,7 @@ public class ArrayTasks {
     public int[] generateNumbers(int length) {
         int[] result = new int[length];
         for (int i = length; i > 0; i--){
-            result [i] = i;
+            result [i - 1] = i;
         }
         return result;
     }
@@ -126,10 +123,26 @@ public class ArrayTasks {
      * arr = [[5, 4], [7]]       -> [[7], [4, 5]]
      */
     public int[][] sortRaggedArray(int[][] arr) {
-        Arrays.sort(arr, Comparator.comparingInt(array -> array.length));
 
-        for (int[] array: arr){
-            Arrays.sort(array);
+        for (int i = 0; i < arr.length - 1; i++){
+            for (int j = 0; j < arr.length - i - 1; j++){
+                if (arr[j].length > arr[j + 1].length){
+                    int[] temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length - 1; j++){
+                for (int k = 0; k < arr[i].length - j - 1; k++){
+                    if (arr[i][k] > arr[i][k + 1]){
+                        int temp = arr[i][k];
+                        arr[i][k] = arr[i][k + 1];
+                        arr[i][k + 1] = temp;
+                    }
+                }
+            }
         }
         return arr;
     }
